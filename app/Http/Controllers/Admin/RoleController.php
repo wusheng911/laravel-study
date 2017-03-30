@@ -50,6 +50,7 @@ class RoleController extends Controller
         $role_perms = (array) $request->input('role_perms');
         DB::beginTransaction();
         $role = Role::create($role);
+        //角色添加权限
         $role->perms()->sync($role_perms);
         DB::commit();
         return $this->index();

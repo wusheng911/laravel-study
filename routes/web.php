@@ -31,5 +31,11 @@ Route::group(
         Route::get('/dashboard','DashboardController@index');
         Route::post('/logout','DashboardController@logout');
         Route::get('/','DashboardController@index');
+
+        Route::get('/contentlist','ContentController@list');
+        Route::resource('/content','ContentController');
+        
+        Route::get('/categorylist','CategoryController@list');
+        Route::resource('/category','CategoryController');
       }
 );

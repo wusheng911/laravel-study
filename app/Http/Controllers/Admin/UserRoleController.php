@@ -83,6 +83,7 @@ class UserRoleController extends Controller
     {
         $user_roles = (array) $request->input('user_roles');
         $user = User::find($id);
+        //用户添加角色
         $user->roles()->sync($user_roles);
         return $this->index();
     }

@@ -15,8 +15,15 @@ class BladeServiceProvider extends ServiceProvider
     }
     private function bladeDirectives()
     {
-        Blade::directive('datetime', function ($expression) {
-            return "<?php echo '测试模板成功'; ?>";
+        // Call to Entrust::can
+        \Blade::directive('permission', function($expression) {
+            /* $guard = \Config::get('entrust.exguard'); */
+            /* return "<?php if (\\Auth::guard('{$guard}')->user()->can{$expression}) : ?>"; */
+            return "<?php if (\\Auth::guard()->user()->can($expression)) : ?>";
+        });
+
+        \Blade::directive('endpermission', function($expression) {
+            return "<?php endif; // Entrust::can ?>";
         });
     }
 }

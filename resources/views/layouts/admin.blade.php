@@ -15,7 +15,7 @@
 
     <link href="/assets/css/main.css" rel="stylesheet">
 
-    <script src="/assets/libs/js/jquery-3.2.0.min/index.js"></script>
+    <script src="/assets/libs/jquery-3.2.0.min/index.js"></script>
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -27,8 +27,8 @@
 <body>
     @include('elements.admintop')
     @yield('content')
-    <script src="/assets/libs/js/DataTables-1.10.13/media/js/jquery.dataTables.min.js"></script>
-    <script src="/assets/libs/js/DataTables-1.10.13/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="/assets/libs/DataTables-1.10.13/media/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/libs/DataTables-1.10.13/media/js/dataTables.bootstrap.min.js"></script>
     @stack('scripts')
 
 </body>

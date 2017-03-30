@@ -89,7 +89,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'role_foreign_key' => 'role_id',
-
+    'exguard' => 'admin',
     //todo roles
     'base_roles' => [
         // id, name, display_name, description

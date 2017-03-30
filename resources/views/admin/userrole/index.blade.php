@@ -3,7 +3,7 @@
 @section('title','用户角色配置')
 
     @push('scripts')
-    <script src="/assets/admin/js/userrole/userrole.js"></script>
+    <script src="/assets/js/admin/userrole/userrole.js"></script>
     @endpush
 
 @section('content')

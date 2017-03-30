@@ -3,7 +3,7 @@
 @section('title','角色面板')
 
 @push('scripts')
-    <script src="/assets/admin/js/role/role.js"></script>
+    <script src="/assets/js/admin/role/role.js"></script>
 @endpush
 @section('content')
       <button type="button" onClick="window.location.href='{{ action('Admin\RoleController@create') }}';" class="btn btn-lg btn-success">新建角色</button>
