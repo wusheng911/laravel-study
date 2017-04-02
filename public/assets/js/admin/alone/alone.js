@@ -1,5 +1,5 @@
-$(onReadyContent);
-function onReadyContent(){
+$(onReadyAlone);
+function onReadyAlone(){
 	table = $("#table").DataTable(conf());
 }
 function conf(){
@@ -12,7 +12,7 @@ function conf(){
     'asSorting':'desc',
     "lengthMenu": [[10, 20, 50], [10, 20, 50]],
     ajax: {
-      url: '/tm/contentlist',
+      url: '/tm/alonelist',
     },
     "columnDefs": [
       {"className": "dt-left", "targets": 0},
@@ -24,14 +24,13 @@ function conf(){
 	width: '72px',
 	orderable: false,
 	"render": function ( data, type, full, meta ) {
-	  var html = '<a class="edit" href="/tm/content/'+data.id+'/edit">编辑</a>';
+	  var html = '<a class="edit" href="/tm/alone/'+data.id+'/edit">编辑</a>';
 	  return html;
 	}
       },
       {data: 'id', width: '16px',"bSort":true,"asSorting":"desc"},
-      {data: 'title'},
-      {data: 'seo_title'},
-      {data: 'description'},
+      {data: 'content'},
+      {data: 'author'},
     ],
  };
 

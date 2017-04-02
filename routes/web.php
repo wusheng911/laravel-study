@@ -17,6 +17,14 @@ Route::get('/', function () {
 });
 Route::get('/home', 'HomeController@index');
 Route::get('/become','Admin\DashboardController@index');
+Route::get('/alone','ViewController@alone');
+Route::get('/about','ViewController@about');
+Route::get('/guestboard','ViewController@guestBoard');
+
+
+
+
+//后台路由
 Route::group(
     ['prefix'=> Config('tm.admin_prefix'),
         'middleware' => 'admin',
@@ -38,5 +46,8 @@ Route::group(
         
         Route::get('/categorylist','CategoryController@list');
         Route::resource('/category','CategoryController');
+
+        Route::get('/alonelist','AloneController@list');
+        Route::resource('/alone','AloneController');
       }
 );
