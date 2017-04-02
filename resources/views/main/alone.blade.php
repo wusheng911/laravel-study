@@ -15,7 +15,7 @@
             </div>
             @php
             $str = $value->created_at;
-            $arr = explode(":", $str);
+            $arr = explode(" ", $str);
             $str = $arr[0];
             @endphp
             <span class="alone-tap">{{$str}}</span>
