@@ -7,3 +7,35 @@
     color:#fff;
     height:60px;
 }
+
+/*  header 样式 start */
+
+.header-container{
+    height:80px;
+    background-color:#fff;
+
+}
+.header-nav{
+    width:1000px;
+    margin:auto;
+    margin-top:25px;
+    display:flex;
+}
+.header-item{
+    display:inline-block;
+    margin-right:20px;
+    height:55px;
+    cursor:pointer;
+}
+.header-main-title{
+    display:block;
+    font-size:20px;
+    color:#000;
+}
+.header-sub-title{
+    text-align:center;
+    font-size:8px;
+    display:none;
+    color:#000;
+}
+/*  header样式 end  */

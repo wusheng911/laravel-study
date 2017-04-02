@@ -13,7 +13,7 @@
 
 Auth::routes();
 Route::get('/', function () {
-    return view('welcome');
+    return view('main.main');
 });
 Route::get('/home', 'HomeController@index');
 Route::get('/become','Admin\DashboardController@index');
@@ -22,6 +22,7 @@ Route::group(
         'middleware' => 'admin',
         'namespace'=>'Admin'
     ],function(){
+        Route::get('/refreshrolesperms','RoleController@refreshRolesPerms');
         Route::get('/rolelist','RoleController@list');
         Route::resource('/role','RoleController');
 

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel学习后台</title>
+    <title>@yield('title')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -26,7 +26,9 @@
 
 <body>
     @include('elements.admintop')
+    @permission('all')
     @yield('content')
+    @endpermission
     <script src="/assets/libs/DataTables-1.10.13/media/js/jquery.dataTables.min.js"></script>
     <script src="/assets/libs/DataTables-1.10.13/media/js/dataTables.bootstrap.min.js"></script>
     @stack('scripts')
