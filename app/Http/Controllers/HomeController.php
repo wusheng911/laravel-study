@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        /* $this->middleware('auth'); */
     }
 
     /**
@@ -23,6 +23,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $documentRoot = $_SERVER['DOCUMENT_ROOT'];
+        $musicDir = $documentRoot.'/assets/music/';
+        $files=scandir($musicDir);
+        $musicNames = array();
+        foreach($files as $key=>$value)
+        {
+           $tmpArr = explode('.',$value);  
+           if(array_pop($tmpArr) == 'mp3')
+           {
+                $musicNames[] = $value;
+           }
+        }
+        return view('main.main',['musicList'=>$musicNames]);
+
     }
 }

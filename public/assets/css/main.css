@@ -18,8 +18,8 @@
 .header-nav{
     width:1000px;
     margin:auto;
-    margin-top:25px;
     display:flex;
+    justify-content: space-between;
 }
 .header-item{
     display:inline-block;
@@ -37,6 +37,13 @@
     font-size:8px;
     display:none;
     color:#000;
+}
+.header-title-container{
+    display:flex;
+    margin-top:25px;
+}
+.header-music-container{
+    align-items: flex-end;
 }
 /*  header样式 end  */
 
