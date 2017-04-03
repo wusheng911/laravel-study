@@ -12,10 +12,8 @@
  */
 
 Auth::routes();
-Route::get('/', function () {
-    return view('main.main');
-});
-Route::get('/home', 'HomeController@index');
+Route::get('/','HomeController@index');
+/* Route::get('/home', 'HomeController@index'); */
 Route::get('/become','Admin\DashboardController@index');
 Route::get('/alone','ViewController@alone');
 Route::get('/about','ViewController@about');

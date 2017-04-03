@@ -12,7 +12,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/libs/jPlayer-2.9.2/dist/skin/blue.monday/css/jplayer.blue.monday.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/assets/libs/jPlayer-2.9.2/lib/circle-player/skin/circle.player.css">
     <!-- Scripts -->
+
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -28,5 +31,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('assets/js/main/header.js')}}"></script>
+    <script type="text/javascript" src="/assets/libs/jPlayer-2.9.2/dist/jplayer/jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="/assets/js/main/myJplayer.js"></script>
+    @stack('scripts')
 </body>
 </html>
