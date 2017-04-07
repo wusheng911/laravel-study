@@ -16,7 +16,7 @@ Auth::routes();
 Route::get('/become','Admin\DashboardController@index');
 Route::get('/alone','ViewController@alone');
 Route::get('/about','ViewController@about');
-Route::get('/guestboard','ViewController@guestBoard');
+Route::get('/guestboard','ViewController@guestBoard')->name('guestboard');
 Route::post('/addguest','ViewController@addGuest');
 Route::get('/','HomeController@index');
 

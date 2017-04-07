@@ -29,7 +29,6 @@ class ViewController extends Controller
         $letter = $request->input('letter');
         GuestBoard::create($letter);
         $guests = GuestBoard::where('status','0')->orderBy('created_at','desc')->get();
-        return view('main.guestboard',['letters'=>$guests]);
-        /* return Redirect::to('/guestboard'); */
+        return redirect()->route('guestboard',['letters'=>$guests]);
     }
 }
