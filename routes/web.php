@@ -12,13 +12,13 @@
  */
 
 Auth::routes();
-Route::get('/','HomeController@index');
 /* Route::get('/home', 'HomeController@index'); */
 Route::get('/become','Admin\DashboardController@index');
 Route::get('/alone','ViewController@alone');
 Route::get('/about','ViewController@about');
 Route::get('/guestboard','ViewController@guestBoard');
-
+Route::post('/addguest','ViewController@addGuest');
+Route::get('/','HomeController@index');
 
 
 

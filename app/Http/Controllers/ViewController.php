@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Alone;
+use App\Models\GuestBoard;
+use Illuminate\Support\Facades\Redirect;
 
 class ViewController extends Controller
 {
@@ -19,7 +21,15 @@ class ViewController extends Controller
     }
     public function guestBoard(Request $request)
     {
-
-        return view('main.guestboard');
+        $guests = GuestBoard::where('status','0')->orderBy('created_at','desc')->get();
+        return view('main.guestboard',['letters'=>$guests]);
+    }
+    public function addGuest(Request $request)
+    {
+        $letter = $request->input('letter');
+        GuestBoard::create($letter);
+        $guests = GuestBoard::where('status','0')->orderBy('created_at','desc')->get();
+        return view('main.guestboard',['letters'=>$guests]);
+        /* return Redirect::to('/guestboard'); */
     }
 }

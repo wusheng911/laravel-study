@@ -25,7 +25,9 @@
 <body style="background-color:#fff">
     <div id="app">
         @include('elements.header')
-        @yield('content')
+        <div class="app-content-container">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
