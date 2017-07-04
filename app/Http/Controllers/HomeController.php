@@ -25,17 +25,26 @@ class HomeController extends Controller
     public function index()
     {
 		//微信分享
-		$url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx4dcfa2241b96bcb2&secret=dd1b7839a21c0ac7fa8e492500ed656c';
-		$html = file_get_contents($url);
-		$obj = json_decode($html);
-		$access_token = $obj->access_token;
-		$url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
-		$html = file_get_contents($url);
-		$obj = json_decode($html);
-		$ticket = $obj->ticket;
+		$access_token = session('access_token');
+		if(empty($access_token)){
+			$url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx4dcfa2241b96bcb2&secret=dd1b7839a21c0ac7fa8e492500ed656c';
+			$html = file_get_contents($url);
+			$obj = json_decode($html);
+			$access_token = $obj->access_token;
+			session(['access_token'=>$access_token]);
+		}
+		$ticket = session('ticket');
+		if(empty($ticket)){
+
+			$url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
+			$html = file_get_contents($url);
+			$obj = json_decode($html);
+			$ticket = $obj->ticket;
+			session(['ticket'=>$ticket]);
+		}
 		$timestamp = time();
 		$noncestr = $this->generate_password(15);
-		$string1 = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url=http://www.wusheng911.com'; 	
+		$string1 = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$_SERVER['HTTP_HOST']; 	
 		$signature = sha1($string1);
 
 
