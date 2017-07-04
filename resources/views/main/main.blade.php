@@ -12,7 +12,7 @@
 <div id="signature">{{ $signature }}</div>
 <div id="timestamp">{{ $timestamp }}</div>
 <div id="noncestr">{{ $noncestr }}</div>
-<div id="noncestr">{{ $ticket }}</div>
+<div id="ticket">{{ $ticket }}</div>
 @endsection
 
 

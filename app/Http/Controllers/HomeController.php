@@ -29,7 +29,7 @@ class HomeController extends Controller
 		$html = file_get_contents($url);
 		$obj = json_decode($html);
 		$access_token = $obj->access_token;
-		$url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=wx_card';
+		$url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
 		$html = file_get_contents($url);
 		$obj = json_decode($html);
 		$ticket = $obj->ticket;
