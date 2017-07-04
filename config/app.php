@@ -176,6 +176,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+		// php set js
+        Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
 
         //插件 用于设置用户权限
         Zizaco\Entrust\EntrustServiceProvider::class,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use JavaScript;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,21 @@ class HomeController extends Controller
      */
     public function index()
     {
+		//微信分享
+		$url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx4dcfa2241b96bcb2&secret=dd1b7839a21c0ac7fa8e492500ed656c';
+		$html = file_get_contents($url);
+		$obj = json_decode($html);
+		$access_token = $obj->access_token;
+		$url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=wx_card';
+		$html = file_get_contents($url);
+		$obj = json_decode($html);
+		$ticket = $obj->ticket;
+		$timestamp = time();
+		$noncestr = $this->generate_password(15);
+		$string1 = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url=http://www.wusheng911.com'; 	
+		$signature = sha1($string1);
+
+
         $documentRoot = $_SERVER['DOCUMENT_ROOT'];
         $musicDir = $documentRoot.'/assets/music/';
         $files=scandir($musicDir);
@@ -35,7 +51,27 @@ class HomeController extends Controller
                 $musicNames[] = $value;
            }
         }
-        return view('main.main',['musicList'=>$musicNames]);
+        $json = [
+            'signature' => $signature,
+            'timestamp' => $timestamp,
+            'noncestr' => $noncestr,
+        ];
+        JavaScript::put($json);
+        return view('main.main',['musicList'=>$musicNames,'signature'=>$signature,'timestamp'=>$timestamp,'noncestr'=>$noncestr]);
 
-    }
+	}
+	function generate_password( $length = 8 ) { 
+		// 密码字符集，可任意添加你需要的字符 
+		$chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_ []{}<>~`+=,.;:/?|'; 
+		$password =''; 
+		for ( $i = 0; $i < $length; $i++ ) 
+		{ 
+			// 这里提供两种字符获取方式 
+			// 第一种是使用 substr 截取$chars中的任意一位字符； 
+			// 第二种是取字符数组 $chars 的任意元素 
+			// $password .= substr($chars, mt_rand(0, strlen($chars) – 1), 1); 
+			$password .= $chars[ mt_rand(0, strlen($chars) - 1) ]; 
+		} 
+		return $password; 
+	} 
 }

@@ -35,6 +35,7 @@
     <script src="{{ asset('assets/js/main/header.js')}}"></script>
     <script type="text/javascript" src="/assets/libs/jPlayer-2.9.2/dist/jplayer/jquery.jplayer.min.js"></script>
     <script type="text/javascript" src="/assets/js/main/myJplayer.js"></script>
+	<script src="/assets/js/app.js"></script>
     @stack('scripts')
 </body>
 </html>
