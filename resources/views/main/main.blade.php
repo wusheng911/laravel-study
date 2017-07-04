@@ -13,6 +13,7 @@
 <div id="timestamp">{{ $timestamp }}</div>
 <div id="noncestr">{{ $noncestr }}</div>
 <div id="ticket">{{ $ticket }}</div>
+<div id="weburl">{{ $weburl }}</div>
 @endsection
 
 

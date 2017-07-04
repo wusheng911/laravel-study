@@ -24,8 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-		var_dump($_SERVER['HTTP_HOST']);
-		exit;
 		//微信分享
 		$access_token = session('access_token');
 		if(empty($access_token)){
@@ -46,7 +44,8 @@ class HomeController extends Controller
 		}
 		$timestamp = time();
 		$noncestr = $this->generate_password(15);
-		$string1 = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url=http://'.$_SERVER['HTTP_HOST']; 	
+		$weburl = 'http://'.$_SERVER['HTTP_HOST'];
+		$string1 = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$weburl;
 		$signature = sha1($string1);
 
 
@@ -69,7 +68,7 @@ class HomeController extends Controller
             'ticket' => $ticket,
         ];
         JavaScript::put($json);
-        return view('main.main',['musicList'=>$musicNames,'signature'=>$signature,'timestamp'=>$timestamp,'noncestr'=>$noncestr,'ticket'=>$ticket]);
+        return view('main.main',['musicList'=>$musicNames,'signature'=>$signature,'timestamp'=>$timestamp,'noncestr'=>$noncestr,'ticket'=>$ticket,'weburl'=>$weburl]);
 
 	}
 	function generate_password( $length = 8 ) { 
