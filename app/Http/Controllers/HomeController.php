@@ -55,9 +55,10 @@ class HomeController extends Controller
             'signature' => $signature,
             'timestamp' => $timestamp,
             'noncestr' => $noncestr,
+            'ticket' => $ticket,
         ];
         JavaScript::put($json);
-        return view('main.main',['musicList'=>$musicNames,'signature'=>$signature,'timestamp'=>$timestamp,'noncestr'=>$noncestr]);
+        return view('main.main',['musicList'=>$musicNames,'signature'=>$signature,'timestamp'=>$timestamp,'noncestr'=>$noncestr,'ticket'=>$ticket]);
 
 	}
 	function generate_password( $length = 8 ) { 
