@@ -46,7 +46,7 @@ class HomeController extends Controller
 		}
 		$timestamp = time();
 		$noncestr = $this->generate_password(15);
-		$string1 = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$_SERVER['HTTP_HOST']; 	
+		$string1 = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url=http://'.$_SERVER['HTTP_HOST']; 	
 		$signature = sha1($string1);
 
 
