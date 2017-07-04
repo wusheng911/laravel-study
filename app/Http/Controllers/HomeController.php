@@ -24,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+		var_dump($_SERVER['HTTP_HOST']);
+		exit;
 		//微信分享
 		$access_token = session('access_token');
 		if(empty($access_token)){
