@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use JavaScript;
+use Cache;
 
 class HomeController extends Controller
 {
@@ -25,22 +26,22 @@ class HomeController extends Controller
     public function index()
     {
 		//微信分享
-		$access_token = session('access_token');
+		$minutes = 120;
+		$access_token = Cache::get('wechat.access_token');
 		if(empty($access_token)){
 			$url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx4dcfa2241b96bcb2&secret=dd1b7839a21c0ac7fa8e492500ed656c';
 			$html = file_get_contents($url);
 			$obj = json_decode($html);
 			$access_token = $obj->access_token;
-			session(['access_token'=>$access_token]);
+			Cache::put('wechat.access_token', $access_token, $minutes);
 		}
-		$ticket = session('ticket');
+		$ticket = Cache::get('wechat.ticket');
 		if(empty($ticket)){
-
 			$url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
 			$html = file_get_contents($url);
 			$obj = json_decode($html);
 			$ticket = $obj->ticket;
-			session(['ticket'=>$ticket]);
+			Cache::put('wechat.ticket', $ticket, $minutes);
 		}
 		$timestamp = time();
 		$noncestr = $this->generate_password(15);
