@@ -19,6 +19,7 @@ Route::get('/about','ViewController@about');
 Route::get('/guestboard','ViewController@guestBoard')->name('guestboard');
 Route::post('/addguest','ViewController@addGuest');
 Route::get('/','HomeController@index');
+Route::post('/wechatshare','HomeController@get_wechat_signature');
 
 
 

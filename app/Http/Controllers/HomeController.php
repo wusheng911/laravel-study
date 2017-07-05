@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use JavaScript;
 use Cache;
+use Log;
 
 class HomeController extends Controller
 {
@@ -25,29 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-		//微信分享
-		$minutes = 120;
-		$access_token = Cache::get('wechat.access_token');
-		if(empty($access_token)){
-			$url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx4dcfa2241b96bcb2&secret=dd1b7839a21c0ac7fa8e492500ed656c';
-			$html = file_get_contents($url);
-			$obj = json_decode($html);
-			$access_token = $obj->access_token;
-			Cache::put('wechat.access_token', $access_token, $minutes);
-		}
-		$ticket = Cache::get('wechat.ticket');
-		if(empty($ticket)){
-			$url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
-			$html = file_get_contents($url);
-			$obj = json_decode($html);
-			$ticket = $obj->ticket;
-			Cache::put('wechat.ticket', $ticket, $minutes);
-		}
-		$timestamp = time();
-		$noncestr = $this->generate_password(15);
-		$weburl = 'http://'.$_SERVER['HTTP_HOST'].'/';
-		$string1 = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$weburl;
-		$signature = sha1($string1);
 
 
         $documentRoot = $_SERVER['DOCUMENT_ROOT'];
@@ -62,15 +40,51 @@ class HomeController extends Controller
                 $musicNames[] = $value;
            }
         }
-        $json = [
-            'signature' => $signature,
-            'timestamp' => $timestamp,
-            'noncestr' => $noncestr,
-            'ticket' => $ticket,
-        ];
-        JavaScript::put($json);
-        return view('main.main',['musicList'=>$musicNames,'signature'=>$signature,'timestamp'=>$timestamp,'noncestr'=>$noncestr,'ticket'=>$ticket,'weburl'=>$weburl]);
+        return view('main.main',['musicList'=>$musicNames]);
 
+	}
+	public function get_wechat_signature(Request $request){
+
+		//微信分享
+		$minutes = 120;
+		$appId = 'wx4dcfa2241b96bcb2';
+		$secret = 'dd1b7839a21c0ac7fa8e492500ed656c';
+		$access_token = Cache::get('wechat:access_token', function() use ($appId,$secret,$minutes){
+			$url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appId.'&secret='.$secret;
+			$html = file_get_contents($url);
+			$obj = json_decode($html);
+			if(isset($obj->access_token)){
+				$access_token = $obj->access_token;
+			}else{
+				$access_token = '';
+			}
+			Cache::put('wechat:access_token', $access_token, $minutes);
+			return $access_token;
+		});
+		$ticket = Cache::get('wechat:ticket', function() use ($access_token, $minutes){
+			$url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
+			$html = file_get_contents($url);
+			$obj = json_decode($html);
+			if(isset($obj->ticket)){
+				$ticket = $obj->ticket;
+			}else{
+				$ticket = '';
+			}
+			Cache::put('wechat:ticket', $ticket, $minutes);
+			return $ticket;
+		});
+		$timestamp = time();
+		$noncestr = $this->generate_password(15);
+		$weburl = 'http://'.$_SERVER['HTTP_HOST'].'/';
+		$string1 = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$weburl;
+		$signature = sha1($string1);
+        $json = ['timestamp' => $timestamp,
+                 'noncestr' => $noncestr,
+				 'signature' => $signature,
+				 'appid' => $appId,
+				 'secret' => $secret
+                 ];
+        return response()->json($json);
 	}
 	function generate_password( $length = 8 ) { 
 		// 密码字符集，可任意添加你需要的字符 
