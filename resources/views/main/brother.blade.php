@@ -28,7 +28,7 @@ $(document).ready(function(){
 				$("#"+target.attr('id')).css('border-color',"#0f0")
 				$('#w-'+target.attr('id')).css('display','none');
 				s++;
-				f--;
+				
 				if(f<0){
 					f =0;
 				}
@@ -40,10 +40,11 @@ $(document).ready(function(){
 			}else if(value == "1"){
 				target.data("v","2");
 				$('#s-'+target.attr('id')).css('display','none');
-				$('#f-'+target.attr('id')).css('display','none');
-				$("#"+target.attr('id')).css('border-color',"#00f")
-				$('#w-'+target.attr('id')).css('display','inline-block');
+				$('#f-'+target.attr('id')).css('display','inline-block');
+				$("#"+target.attr('id')).css('border-color',"#f00")
+				$('#w-'+target.attr('id')).css('display','none');
 				s--;
+				f++;
 				
 				if(s<0){
 					s =0;
@@ -55,10 +56,10 @@ $(document).ready(function(){
 			}else if(value == "2"){
 				target.data("v","0");
 				$('#s-'+target.attr('id')).css('display','none');
-				$('#f-'+target.attr('id')).css('display','inline-block');
-				$("#"+target.attr('id')).css('border-color',"#f00")
-				$('#w-'+target.attr('id')).css('display','none');
-				f++;
+				$('#f-'+target.attr('id')).css('display','none');
+				$("#"+target.attr('id')).css('border-color',"#00f")
+				$('#w-'+target.attr('id')).css('display','inline-block');
+				f--;
 				if(f<0){
 					f =0;
 				}
@@ -81,7 +82,7 @@ $(document).ready(function(){
 		</div>
 	@foreach($list as $key => $value)
 		<div class="brother-group">
-		<div id="{{$key}}" class="brother-item" data-v="2">{{$value}}</div>
+		<div id="{{$key}}" class="brother-item" data-v="0">{{$value}}</div>
 		<div id="w-{{$key}}" class="brother-item-wait">待定</div>
 		<div id="s-{{$key}}" class="brother-item-success">合格</div>
 		<div id="f-{{$key}}" class="brother-item-fail">不合格</div>
