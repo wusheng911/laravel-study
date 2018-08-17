@@ -61,6 +61,9 @@ $(document).ready(function(){
 
 @section('content')
 <div class="brother-container">
+		<div class="brother-group">
+		<div id="" class="brother-tap" data-v="0">职业名称</div>
+		</div>
 	@foreach($list as $key => $value)
 		<div class="brother-group">
 		<div id="{{$key}}" class="brother-item" data-v="0">{{$value}}</div>
