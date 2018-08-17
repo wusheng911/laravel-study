@@ -13,6 +13,7 @@
 
 Auth::routes();
 /* Route::get('/home', 'HomeController@index'); */
+Route::get('/brother','ViewController@brother');
 Route::get('/become','Admin\DashboardController@index');
 Route::get('/alone','ViewController@alone');
 Route::get('/about','ViewController@about');
