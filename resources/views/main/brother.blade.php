@@ -38,13 +38,13 @@ $(document).ready(function(){
 		$("#ww").html(w);
 
 			}else if(value == "1"){
-				target.data("v","0");
+				target.data("v","2");
 				$('#s-'+target.attr('id')).css('display','none');
-				$('#f-'+target.attr('id')).css('display','inline-block');
-				$("#"+target.attr('id')).css('border-color',"#f00")
-				$('#w-'+target.attr('id')).css('display','none');
-				f++;
+				$('#f-'+target.attr('id')).css('display','none');
+				$("#"+target.attr('id')).css('border-color',"#00f")
+				$('#w-'+target.attr('id')).css('display','inline-block');
 				s--;
+				
 				if(s<0){
 					s =0;
 				}
@@ -52,13 +52,13 @@ $(document).ready(function(){
 		$("#ff").html(f);
 		$("#ss").html(s);
 		$("#ww").html(w);
-			}else{
-				target.data("v","1");
-				$('#s-'+target.attr('id')).css('display','inline-block');
-				$('#f-'+target.attr('id')).css('display','none');
-				$("#"+target.attr('id')).css('border-color',"#0f0")
+			}else if(value == "2"){
+				target.data("v","0");
+				$('#s-'+target.attr('id')).css('display','none');
+				$('#f-'+target.attr('id')).css('display','inline-block');
+				$("#"+target.attr('id')).css('border-color',"#f00")
 				$('#w-'+target.attr('id')).css('display','none');
-				s++;
+				f++;
 				if(f<0){
 					f =0;
 				}
